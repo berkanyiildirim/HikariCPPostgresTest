@@ -1,7 +1,5 @@
 package com.example.demo.BenchmarkTest;
 
-import com.example.demo.models.Session;
-import com.example.demo.repositories.SessionRepository;
 import com.example.demo.repositories.SpeakerRepository;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.*;
@@ -9,9 +7,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;;
-
-import java.sql.SQLException;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
@@ -20,12 +16,10 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class dbSelectTest {
 
-    private static SessionRepository sessionRepository;
     private static SpeakerRepository speakerRepository;
 
     @Autowired
-    public void setRepository(SessionRepository sessionRepository,SpeakerRepository speakerRepository) {
-        dbSelectTest.sessionRepository = sessionRepository;
+    public void setRepository(SpeakerRepository speakerRepository) {
         dbSelectTest.speakerRepository = speakerRepository;
     }
 
@@ -46,20 +40,7 @@ public class dbSelectTest {
     }
 
     @Benchmark
-    public void dbInserts(Parameters parameters) {
-        int size = Integer.parseInt(parameters.batchSize);
-
-        for (int i = 0; i < size; i++) {
-            Session session = new Session();
-            session.setSession_name("A Deep Dive Into Spring IoC");
-            session.setSession_description("");
-            session.setSession_length(45);
-            sessionRepository.save(session);
-        }
-    }
-
-    @Benchmark
-    public void dbSelects(Parameters parameters) throws SQLException {
+    public void dbSelects(Parameters parameters) {
         int size = Integer.parseInt(parameters.batchSize);
 
         for (int i = 0; i < size; i++) {
