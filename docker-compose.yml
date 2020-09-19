@@ -1,13 +1,27 @@
 version: "3.3"
+
 services:
-  db:
+  postgres:
     image: postgres:12.1-alpine
     container_name: "hikaricpDemo-postgres"
     restart: always
     environment:
       POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'password'
+      POSTGRES_PASSWORD: 'pass'
     ports:
       - '5432:5432'
-    expose:
-      - '5432'
+    volumes:
+      - ${HOME}/postgres-data/hikariDemo:/var/lib/postgresql/data
+
+  pgbouncer:
+    image: brainsam/pgbouncer
+    container_name: "PGbouncerDemo-postgres"
+    environment:
+      DB_HOST: postgres
+      DB_USER: postgres           # define credentials
+      DB_PASSWORD: pass           # define credentials
+      DB_port: 5432               # define database
+    links:
+      - postgres:postgres
+    ports:
+      - 6432:6432                 # PgBouncer port
