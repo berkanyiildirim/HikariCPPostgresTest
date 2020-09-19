@@ -31,7 +31,7 @@ public class dbInsertTest {
                 .warmupIterations(3)
                 .measurementIterations(3)
                 .forks(0)
-                .threads(1)
+                .threads(16)
                 .shouldDoGC(true)
                 .shouldFailOnError(true)
                 .jvmArgs("-server")
