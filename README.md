@@ -36,6 +36,7 @@ Benchmark                             (batchSize)  Mode  Cnt     Score     Error
 BenchmarkTest.dbInsertTest.dbInserts            1  avgt    3     2.150 ±   1.202  ms/op
 BenchmarkTest.dbInsertTest.dbInserts         1000  avgt    3  4567.841 ± 935.077  ms/op
 
+Tomcat
 Benchmark                             (batchSize)  Mode  Cnt     Score      Error  Units
 BenchmarkTest.dbInsertTest.dbInserts            1  avgt    3     4.794 ±    1.143  ms/op
 BenchmarkTest.dbInsertTest.dbInserts         1000  avgt    3  4596.015 ± 1094.391  ms/op
